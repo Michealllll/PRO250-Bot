@@ -1,0 +1,4 @@
+nextcord
+nextcord[voice,speed]
+lyricsgenius
+youtube_dl
