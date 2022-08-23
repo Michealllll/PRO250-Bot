@@ -2,6 +2,7 @@ import nextcord
 import os
 from nextcord.ext import commands
 
+os.environ['BOTTOKEN'] = ''
 token = os.getenv('BOTTOKEN')  # gets the environment variable that is the bot token i made one
 
 intents = nextcord.Intents.default()
@@ -29,4 +30,4 @@ if __name__ == "__main__":
     for extension in innitial_extensions:
         client.load_extension(extension)
 
-client.run('MTAwOTYyODQ3NDM1NDQ0MjM0Mw.GAT7bB.Gk4OZ0APD3I3IE3eLwR1tifYZqN_f3seNz8E2g')  # runs the bot
+client.run(token)  # runs the bot
