@@ -11,4 +11,4 @@ class MemeGen(commands.Cog):
 
 # Setup
 def setup(client):
-    client.add_cog(Kick(client))
+    client.add_cog(MemeGen(client))
