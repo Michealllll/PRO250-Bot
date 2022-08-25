@@ -1,4 +1,4 @@
-import nextcord, requests
+import nextcord, requests, unittest
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
@@ -22,3 +22,14 @@ class Affirmation(commands.Cog):
 # Setup
 def setup(client):
     client.add_cog(Affirmation(client))
+
+
+
+
+# Unit Testing
+class TestAffirmation(unittest.TestCase):
+    def testResponse(self):
+        self.assertIsNotNone == True
+
+if __name__ == '__main__':
+    unittest.main()

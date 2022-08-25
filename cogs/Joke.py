@@ -2,8 +2,6 @@ import nextcord, requests
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
-
-
 class Joke(commands.Cog):
     def __init__(self, client):
         self.client = client
