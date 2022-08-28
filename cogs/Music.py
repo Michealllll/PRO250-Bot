@@ -1,4 +1,4 @@
-import nextcord, wavelink
+import nextcord, wavelink, unittest
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
@@ -23,15 +23,51 @@ class Music(commands.Cog):
         else:
             vc: wavelink.Player = ctx.voice_client
 
+        await ctx.send(f"Now Playing {search.title}")
         await vc.play(search)
 
-        # playEmbed = nextcord.Embed(
-        #     title=f"{search['title']}",
-        #     description=f"{search['title']} \n\nRequested By <@{ctx.author.id}>",
-        #     url=f"",
-        #     color=0x2852fa
-        # )
-        # await ctx.send(embed=playEmbed)
+    @commands.command()
+    async def pause(self, ctx: commands.Context):
+        if not ctx.voice_client:
+            return await ctx.send("Music not being played. Unable to Pause.")
+        elif not getattr(ctx.author.voice, "channel", None):
+            return await ctx.send("It is required that the user be in a voice channel to Pause.")
+        else:
+            vc: wavelink.Player = ctx.voice_client
+
+        await ctx.send(f"Music Paused. By: {ctx.author.name}")
+        await vc.pause()
+
+    @commands.command()
+    async def resume(self, ctx: commands.Context):
+        if not ctx.voice_client:
+            return await ctx.send("Music not being played. Unable to Resume.")
+        elif not getattr(ctx.author.voice, "channel", None):
+            return await ctx.send("It is required that the user be in a voice channel to Resume Playing.")
+        else:
+            vc: wavelink.Player = ctx.voice_client
+
+        await ctx.send(f"Music Resumed. By: {ctx.author.name}")
+        await vc.resume()
+
+    @commands.command()
+    async def stop(self, ctx: commands.Context):
+        if not ctx.voice_client:
+            return await ctx.send("Music not being played. Unable to Stop a Player.")
+        elif not getattr(ctx.author.voice, "channel", None):
+            return await ctx.send("It is required that the user be in a voice channel to Stop a Player.")
+        else:
+            vc: wavelink.Player = ctx.voice_client
+
+        await ctx.send(f"Music Stopped. By: {ctx.author.name}")
+        await vc.stop()
+        
+    @commands.command()
+    async def disconnect(self, ctx: commands.Context):
+        vc: wavelink.Player = ctx.voice_client
+        await ctx.send(f"Bot Disconnecting. By: {ctx.author.name}")
+        await vc.disconnect()
+
 
 # Setup
 def setup(client):

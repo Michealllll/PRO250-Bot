@@ -23,13 +23,16 @@ class Affirmation(commands.Cog):
 def setup(client):
     client.add_cog(Affirmation(client))
 
-
-
-
 # Unit Testing
-class TestAffirmation(unittest.TestCase):
-    def testResponse(self):
-        self.assertIsNotNone == True
+class TestAffirmationAPI_Success(unittest.TestCase):
+    def testResponse_Success(self):
+        response = requests.get("https://www.affirmations.dev/")
+        self.assertEqual(response.status_code, 200)
+
+class TestAffirmationAPI_Failure(unittest.TestCase):
+    def testResponse_Failure(self):
+        response = requests.get("https://www.affirmations.dev/")
+        self.assertNotEqual(response.status_code, 404)
 
 if __name__ == '__main__':
     unittest.main()

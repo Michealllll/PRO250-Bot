@@ -1,4 +1,4 @@
-import nextcord, requests
+import nextcord, requests, unittest
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
@@ -6,7 +6,7 @@ class Fox(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Connect To Affirmation API
+    # Connect To Fox API
     @commands.command(pass_context=True)
     async def fox(self, ctx):
         response = requests.get("https://randomfox.ca/floof/")
@@ -23,3 +23,17 @@ class Fox(commands.Cog):
 # Setup
 def setup(client):
     client.add_cog(Fox(client))
+
+# Unit Testing
+class TestFoxAPIConnection_Success(unittest.TestCase):
+    def testResponse_Success(self):
+        response = requests.get("https://randomfox.ca/floof/")
+        self.assertEqual(response.status_code, 200)
+
+class TestFoxAPIConnection_Failure(unittest.TestCase):
+    def testResponse_Failure(self):
+        response = requests.get("https://randomfox.ca/floof/")
+        self.assertNotEqual(response.status_code, 404)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,4 +1,4 @@
-import nextcord, requests
+import nextcord, requests, unittest
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
 
@@ -6,9 +6,9 @@ class RandomUser(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Connect To MemeGen API
+    # Connect To RandomUser API
     @commands.command(pass_context=True)
-    async def user(self, ctx):
+    async def ruser(self, ctx):
         response = requests.get("https://randomuser.me/api/")
         rand = response.json()
         randEmbed = nextcord.Embed(
@@ -22,3 +22,17 @@ class RandomUser(commands.Cog):
 # Setup
 def setup(client):
     client.add_cog(RandomUser(client))
+
+# Unit Testing
+class TestRandomUserAPIConnection_Success(unittest.TestCase):
+    def testResponse_Success(self):
+        response = requests.get("https://randomuser.me/api/")
+        self.assertEqual(response.status_code, 200)
+
+class TestRandomUserAPIConnection_Failure(unittest.TestCase):
+    def testResponse_Failure(self):
+        response = requests.get("https://randomuser.me/api/")
+        self.assertNotEqual(response.status_code, 404)
+
+if __name__ == '__main__':
+    unittest.main()

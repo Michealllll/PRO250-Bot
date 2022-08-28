@@ -12,7 +12,7 @@ class YTSearch(commands.Cog):
         ytEmbed = nextcord.Embed(
             title=query,
             color=0x2852fa,
-            description=f"Click The Text Above To Got To Your Youtube Search",
+            description=f"Click The Text Above To Get To Your Youtube Search",
             url=f"https://www.youtube.com/results?search_query={query}"
         )
         ytEmbed.set_thumbnail("https://cdn.discordapp.com/attachments/991958269012758548/1003381079832543363/youtube.png")
