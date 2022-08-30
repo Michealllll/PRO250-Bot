@@ -1,19 +1,11 @@
 import nextcord, requests
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
-# https://http.cat/[status_code]
-
-#response = requests.get("https://http.cat/[num starting at 100]")
-#print(response.text)
 
 
 
 
-
-# affirmation = response.json()
-
-
-
+import unittest
 
 class Cat(commands.Cog):
     def __init__(self, client):
@@ -29,11 +21,22 @@ class Cat(commands.Cog):
             title="Enjoy your Randomized Cat",
             description=f"{catobj[0]['url']} \n\nRequested By <@{ctx.author.id}>",
             url=f"",
-            color=0x2852fa
-            
+            color=0x2852fa           
         )
         catEmbed.set_image(url=f"{catobj[0]['url']}")
         await ctx.send(embed=catEmbed)
+
+
+class catTest(unittest.TestCase):
+    def testResponse_Success(self):
+        api_key = 'live_oQxlCVcGsl3KBfVTLdTrj5WT9Jtv0nf8aEbOjwxGK0l4tJwzqZMxLaWc779aexvX'
+        response = requests.get(f"https://api.thecatapi.com/v1/images/search?api_key={api_key}")
+        self.assertEqual(response.status_code, 200)
+
+    def testResponse_Failure(self):
+        api_key = 'live_oQxlCVcGsl3KBfVTLdTrj5WT9Jtv0nf8aEbOjwxGK0l4tJwzqZMxLaWc779aexvX'
+        response = requests.get(f"https://api.thecatapi.com/v1/images/search?api_key={api_key}")
+        self.assertNotEqual(response.status_code, 404)
 
 
 # Setup

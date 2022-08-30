@@ -1,6 +1,7 @@
 import nextcord, wavelink, unittest
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions
+from unittest import IsolatedAsyncioTestCase, TestCase
 
 class Music(commands.Cog):
 
@@ -67,6 +68,16 @@ class Music(commands.Cog):
         vc: wavelink.Player = ctx.voice_client
         await ctx.send(f"Bot Disconnecting. By: {ctx.author.name}")
         await vc.disconnect()
+
+class MusicTest(IsolatedAsyncioTestCase):
+    async def node_connect(self):
+        await self.client.wait_until_ready()
+        connection = await wavelink.NodePool.create_node(bot=self.client, host='lavalinkinc.ml', port=443, password='incognito', https=True)
+        self.assertTrue(connection)
+    async def didnotConnect(self):
+        await self.client.wait_until_ready()
+        connection = await wavelink.NodePool.create_node(bot=self.client, host='la123189valin120392190sdalkjkinc.ml', port=4439999, password='incognito', https=True)
+        self.assertFalse(connection, "Hello")
 
 
 # Setup

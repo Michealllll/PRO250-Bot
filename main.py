@@ -1,6 +1,7 @@
 import nextcord
 import os
 from nextcord.ext import commands
+# import discord.ext.test as dpytest
 
 os.environ['BOTTOKEN'] = ''
 token = os.getenv('BOTTOKEN')  # gets the environment variable that is the bot token i made one
@@ -29,5 +30,7 @@ for i in os.listdir("cogs"):
 if __name__ == "__main__":
     for extension in innitial_extensions:
         client.load_extension(extension)
+    
+client.run('MTAwOTYyODQ3NDM1NDQ0MjM0Mw.G8W_uE.V0znv0PgvPKDn9kpnLgjqkfAxzpnTUVoxDqBV4')  # runs the bot
 
-client.run(token)  # runs the bot
+
