@@ -79,7 +79,6 @@ class MusicTest(IsolatedAsyncioTestCase):
         connection = await wavelink.NodePool.create_node(bot=self.client, host='la123189valin120392190sdalkjkinc.ml', port=4439999, password='incognito', https=True)
         self.assertFalse(connection, "Hello")
 
-
-# Setup
+# setup
 def setup(client):
     client.add_cog(Music(client))
