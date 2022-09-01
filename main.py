@@ -28,4 +28,4 @@ if __name__ == "__main__":
     for extension in innitial_extensions:
         client.load_extension(extension)
 
-client.run(token)  # runs the bot
+client.run('MTAxMTAyMDA4MDA1MTY2Mjk3OQ.G7tFRz.EJRmaC5GqFabiU1g2SeaAEjiIqaVviFEIB5OWA')  # runs the bot
